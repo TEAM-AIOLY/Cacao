@@ -4,10 +4,4 @@ __pycache__/
 *$py.class
 *.csv
 *.pth
-deepchemo/
-*.pdf
-*.pkl
-*.json
-*.txt
-*.text
-data/dataset
+data/datasets
