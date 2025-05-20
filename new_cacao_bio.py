@@ -12,7 +12,7 @@ import random
 random.seed(42)
 
 # === Load and preprocess data ===
-data_path = './data/dataset/3rd_data_sampling_and_microbial_data/y_bio.csv'
+data_path = './data/datasets/3rd_data_sampling_and_microbial_data/y_bio.csv'
 
     
     
@@ -28,7 +28,7 @@ X = X.map(lambda x: str(x).replace(',', '.'))
 X = np.array(X).astype(float)
 X = StandardScaler().fit_transform(X)
 
-microbe_path = './data/dataset/3rd_data_sampling_and_microbial_data/MIX MICROBE dis.csv'
+microbe_path = './data/datasets/3rd_data_sampling_and_microbial_data/MIX MICROBE dis.csv'
 data_microbe = pd.read_csv(microbe_path, sep=',', header=0, lineterminator='\n', skip_blank_lines=True)
 Y = np.array(data_microbe.iloc[0:17, 1:])
 y_micro = Y[:, 1:]
@@ -190,11 +190,11 @@ for pc1, pc2, pc3 in triplets:
                              bbox_to_anchor=(1.05, 1), loc='upper left', handletextpad=1.2, labelspacing=1.0)
     ax.add_artist(ferti_legend)
     plt.tight_layout()
-    # plt.show()
-    save_subfolder = os.path.join(three_d_folder, f"PC{pc1+1}_vs_PC{pc2+1}_vs_PC{pc3+1}")
-    os.makedirs(save_subfolder, exist_ok=True)
-    plt.savefig(os.path.join(save_subfolder, f'3D_PC{pc1+1}_vs_PC{pc2+1}_vs_PC{pc3+1}.png'), dpi=900)  # Save as PNG with high DPI
-    plt.close()
+    plt.show(block=False)
+    # save_subfolder = os.path.join(three_d_folder, f"PC{pc1+1}_vs_PC{pc2+1}_vs_PC{pc3+1}")
+    # os.makedirs(save_subfolder, exist_ok=True)
+    # plt.savefig(os.path.join(save_subfolder, f'3D_PC{pc1+1}_vs_PC{pc2+1}_vs_PC{pc3+1}.png'), dpi=900)  # Save as PNG with high DPI
+    # plt.close()
     
 # === 6. 3D PCA with Microbe Labels ===
 # for label_idx, label_name in enumerate(label_names):
