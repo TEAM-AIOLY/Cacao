@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from scipy.io import savemat
-
+import numpy as np
 
 data_root ='C:/00_aioly/GitHub/Cacao/data/datasets/'    
 
@@ -103,5 +103,16 @@ for i, fname in enumerate(os.listdir(microbe_path)):
             'value': value
         }
 
+
+def replace_none_with_empty(obj):
+    if isinstance(obj, dict):
+        return {k: replace_none_with_empty(v) for k, v in obj.items() if v is not None}
+    elif obj is None:
+        return np.array([])
+    else:
+        return obj
+
+database_clean = replace_none_with_empty(database)
+
 save_path =os.path.join(data_root,'cacao_database.mat')      
-savemat(save_path, database)  
+savemat(save_path, database_clean)  
