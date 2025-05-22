@@ -49,7 +49,7 @@ d = 1   # Sav.Gol derivative order
 # X = np.log1p(X)
 # X = savgol_filter(X, window_length=w, polyorder=p, deriv=d, axis=1)
 # X = detrend(X, axis=1)
-# X=snv(X)
+X=snv(X)
 
 lv_list = [5, 5, 8, 3,8]
 
@@ -62,7 +62,7 @@ for i,key in enumerate(nutirents):
     n_samples = X.shape[0]
     indices = np.arange(n_samples)
     # Example: every 3rd sample is test, others are train
-    test_mask = (indices + 1) % 3 == 0
+    test_mask = (indices + 1) % 4 == 0
     X_train, X_test = X[~test_mask], X[test_mask]
     Y_train, Y_test = Y_rep[~test_mask], Y_rep[test_mask]
     
@@ -76,7 +76,6 @@ for i,key in enumerate(nutirents):
         perf.append(rmse)
 
     y_pred_final = plsr.predict(X_test, lv_list[i])
-    ccc_value = ccc(torch.from_numpy(Y_test), y_pred_final)
     r2_value = r2_score(torch.from_numpy(Y_test), y_pred_final)
 
     # RMSEP curve

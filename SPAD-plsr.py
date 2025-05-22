@@ -44,12 +44,10 @@ for d_key in ['d1', 'd2', 'd3']:
     # X = np.log1p(spectral)
     # X = savgol_filter(spectral, window_length=w, polyorder=p, deriv=d, axis=1)
     # X = detrend(spectral, axis=1)
+    # X=snv(spectral)
     
-    X=snv(spectral)
+    X=spectral
     
-    
-  
-
     n_samples = len(spectral)
     indices = np.arange(n_samples)
     test_mask = (indices + 1) % 4 == 0
@@ -69,7 +67,7 @@ for d_key in ['d1', 'd2', 'd3']:
         rmse = torch.sqrt(F.mse_loss(y_pred, y_test_tensor, reduction='none')).mean(dim=0)
         perf.append(rmse)
 
-    y_pred_final = plsr.predict(X_test, n_components - 1)
+    y_pred_final = plsr.predict(X_test, 7)
     ccc_value = ccc(y_test_tensor, y_pred_final)
     r2_value = r2_score(y_test_tensor, y_pred_final)
 
